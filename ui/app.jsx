@@ -127,7 +127,7 @@ class MovieBtn extends React.Component {
 				<button type="button" onClick={this.summarizeMovie}>
 				{this.props.movieTitle}
 				</button>
-				<MovieSummary movieID={this.state.movieID} />
+				{this.state.movieID != '' ? <MovieSummary movieID={this.state.movieID} /> : <div></div>}
 			</div>
 		)
 	}
@@ -137,19 +137,17 @@ class MovieSummary extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 		this.componentDidMount = this.componentDidMount.bind(this)
-		this.state = {summary: {}}
+		this.state = {summary: []}
 	}
 
 	componentDidMount() {
 		if (this.props.movieID != '') {
-			var url = "http://www.omdbapi.com/?i=" + this.props.movieID+ "plot=full&r=json"
-    	console.log(url)
+			var url = "http://www.omdbapi.com/?i=" + this.props.movieID+ "&plot=full&r=json"
     	var _this = this;
     	this.serverRequest = 
       axios
         .get(url)
         .then(function(result) {    
-        	console.log(result.data)
           _this.setState({
            	summary: result.data
           });
@@ -165,11 +163,21 @@ class MovieSummary extends React.Component {
   
 
 	render() {
+		var dataRows = [];
+		var data = this.state.summary;
+		console.log(data)
 
-		var movieSummary = this.state.summary;
+
 
 		return(
-				<div> </div>
+				<div>
+					<div> {data.Title} </div>
+					<div> {data.Year} </div>
+					<div> {data.Rated} </div>
+					<div> {data.Released} </div>
+					<div> {data.Runtime} </div>
+					<div> {data.Actors}< /div>
+				</div>
 		)
 	}
  
