@@ -1,0 +1,39 @@
+.movieDetailsMain {
+	background-color: #ccf5ff;
+  overflow: hidden;
+}
+
+.movieImage{
+	width: 35%;
+	height: 50%;
+}
+
+.posterDisplay {
+	border-style: solid;
+	border-width: 50px;
+	float: left;
+}
+
+.movieContent {
+  float:left;
+	padding-top: 50px;
+	font-size: 24px;
+	font-color: blue;
+	padding-bottom: 50px
+}
+
+.movieSpec {
+  margin-left: 25px;
+  margin-top: 15px;
+}
+
+.specLabel {
+  font-weight: bold;
+}
+
+.backButton {
+  float: right;
+  font-weight: 20px;
+  font-size: 25px;
+  width: 50px;
+}

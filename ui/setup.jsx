@@ -7,11 +7,15 @@ import reducer from './reducer';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 
+import { Router, Route, browserHistory } from 'react-router';
+import Home from './home';
+import MovieDetails from './movieDetails';
+
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
 	reducer,
-  applyMiddleware(sagaMiddleware)
+  applyMiddleware(sagaMiddleware),
 );
 
 sagaMiddleware.run(rootSaga);
@@ -20,12 +24,17 @@ window.React = React;
 
 const setup = {};
 
-setup.render = function render(Component) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <Component />
-    </Provider>, 
-    document.getElementById('root'));
+setup.render = function render(App) {
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={Home} />
+      <Route path="/search" component={App} />
+      <Route path="/details" component={MovieDetails} />
+    </Router>
+  </Provider>,
+  document.getElementById('root'));
 };
 
 export default setup;

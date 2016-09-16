@@ -1,10 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import * as appActions from './actions';
 import MovieButton from './movieButton';
+import MovieDetails from './movieDetails';
 
+import { browserHistory } from 'react-router';
+
+import './stylesheets/app.css';
 
 class App extends React.Component {
 
@@ -18,46 +22,46 @@ class App extends React.Component {
       var movies = [];
       movieList.map((movie,i) => {
         movies.push(<MovieButton key={i} movieTitle={movie.Title} movieID={movie.imdbID} onClick={this.handleMovieBtnClick}/>);
+        //movies.push(<MovieButton movieTitle={movie.Title} movieID={movie.imdbID} />);
       });
       return movies;
     } 
   }
 
   handleMovieBtnClick = (movieID) => {
+    console.log(movieID)
+    // set the state of the movieDetails object here, otherwise the movieDetails object will be empty 
+    //when MovieDetails component tries to use the object.
     this.props.requestMovieDetails(movieID);
+    browserHistory.push('/details')
+    
   }
 
-  renderSpecificMovieDetails = () => {
-    var movieDetails = this.props.movieDetails;
-    if (movieDetails == null) {
-      return;
-    }
+  // renderSpecificMovieDetails = () => {
+  //   var movieDetails = this.props.movieDetails;
+  //   if (movieDetails == null) {
+  //     return;
+  //   }
 
-    if (Object.getOwnPropertyNames(movieDetails).length !== 0) {
-      console.log(movieDetails)
-      var info = (
-        <div ref="movieDetails">
-          <div> Title: {movieDetails.Title} </div>
-          <div> Year: {movieDetails.Year} </div>
-          <div> Rating: {movieDetails.Rated} </div>
-          <div> Released: {movieDetails.Released} </div>
-          <div> Actors: {movieDetails.Actors} </div>
-          <div> Runtime: {movieDetails.Runtime}</div>
-        </div>
-      );
-      return info;
-    }
-  }
+  //   if (Object.getOwnPropertyNames(movieDetails).length !== 0) {
+  //     return <MovieDetails movieDetails={movieDetails} />
+  //   }
+  // }
 
   render() {
-    const { requestMovieList } = this.props;
-    return ( 
-      <div ref="searchArea">
-        <label htmlFor="searchBar"> Search Titles: </label>
-        <input ref="searchBar" type="text" />
-        <button ref="searchBtn" onClick={() => requestMovieList(this.refs.searchBar.value)}> Find My Movies </button>
-        <div> {this.renderMovieTable()} </div>
-        <div> {this.renderSpecificMovieDetails()} </div>
+    const { searchQuery, searchQueryChanged, requestMovieList } = this.props;
+    return (
+      <div className="appMain"> 
+        <div ref="searchArea" className="searchArea">
+          <div>
+            <label htmlFor="searchBar">Search: </label>
+            <input id="searchBar" ref="searchBar" type="text" value={searchQuery} onChange={(e) => searchQueryChanged(e.target.value)} placeholder="Movie Title" />
+          </div>
+          <div>
+            <button ref="searchBtn" onClick={() => requestMovieList(searchQuery)}> Find My Movies </button>
+          </div>
+        </div>
+        <div className="movieListArea"> {this.renderMovieTable()} </div> 
       </div>
     );
   }
@@ -65,8 +69,9 @@ class App extends React.Component {
 
 function mapStateTopProps(state) {
   return {
+    searchQuery: state.searchQuery,
     movieList: state.movieList,
-    movieDetails: state.movieDetails
+    //movieDetails: state.movieDetails
   }
 }
 

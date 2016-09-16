@@ -22,11 +22,15 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "css-loader": "^0.25.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "react-router-redux": "^4.0.5",
     "redux": "^3.6.0",
-    "redux-saga": "^0.11.1"
+    "redux-saga": "^0.11.1",
+    "style-loader": "^0.13.1"
   },
   "description": "npm install npm run vendor npm run develop",
   "main": "webpack.config.js",

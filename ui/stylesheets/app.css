@@ -1,0 +1,18 @@
+.appMain {
+	background-color: #ccf5ff;
+}
+.searchArea {
+	font-size: 24px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.movieListArea{
+	-webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    width:600px;
+    margin:auto;
+}
+
+

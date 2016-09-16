@@ -1,14 +1,15 @@
-import * as types from './types';
+import types from './types';
 
 const defaultState = {
+  searchQuery: '',
   movieList: [],
   movieDetails: {}
 };
 
 export default function movies(state = defaultState, action) {
   switch (action.type){
-    // As soon as a the search button is clicked, remove the current movie list
-    // because it take time for fetch to return an error if the url is not valid.
+  case types.SEARCH_QUERY_CHANGED:
+    return {...state, searchQuery: action.searchQuery};
   case types.REQUEST_MOVIE_LIST: 
   // When the user enters in a new search query, need to get rid of the current movie details
     return defaultState;

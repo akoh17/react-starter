@@ -1,0 +1,16 @@
+/* Needed to change module.loaders and resolve in webpack.config.js and install css-loader and style-loader*/
+.homeMain {
+	background-color: #ccf5ff;
+}
+
+.content {
+	border-style: solid;
+}
+
+.searchPageLink:visited {
+	color: white;
+}
+
+.searchPageLink:hover {
+	background-color:  #adebeb;
+}
