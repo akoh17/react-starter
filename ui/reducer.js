@@ -12,7 +12,7 @@ export default function movies(state = defaultState, action) {
     return {...state, searchQuery: action.searchQuery};
   case types.REQUEST_MOVIE_LIST: 
   // When the user enters in a new search query, need to get rid of the current movie details
-    return defaultState;
+    return {movieList: [], movieDetails: {}, searchQuery: action.searchQuery};
   case types.RESPONSE_MOVIE_LIST:
     return {...state, movieList: action.movieList};
   case types.REQUEST_MOVIE_DETAILS:

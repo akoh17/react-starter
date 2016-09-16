@@ -29,7 +29,6 @@ class App extends React.Component {
   }
 
   handleMovieBtnClick = (movieID) => {
-    console.log(movieID)
     // set the state of the movieDetails object here, otherwise the movieDetails object will be empty 
     //when MovieDetails component tries to use the object.
     this.props.requestMovieDetails(movieID);
